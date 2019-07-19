@@ -113,7 +113,7 @@ model.add(Dropout(0.2))
 model.add(LSTM(units = 50))
 model.add(Dense(1))
 model.compile(loss='mean_squared_error',optimizer='adam')
-model.fit(x_train,y_train,epochs=300,batch_size=32,verbose=1)
+model.fit(x_train,y_train,epochs=50,batch_size=32,verbose=0)
 
 inputs = new_data[len(new_data)-len(valid)-60:].values
 inputs= inputs.reshape(-1,1)
@@ -130,7 +130,7 @@ x_test = np.array(x_test)
 print("x_test len =",len(x_test ))
 x_test = np.reshape(x_test,(x_test.shape[0],x_test.shape[1],1))
 
-price = model.predict(x_test,verbose=1)
+price = model.predict(x_test,verbose=0)
 price = scaler.inverse_transform(price)
 
 rms = np.sqrt(np.mean(np.power((valid-price),2)))
@@ -142,4 +142,15 @@ print("Len of price",len(price))
 for i in range(len(price)):
     print("price = ",price[i],"Value of i",i)
 
-print("---Execution Time %s seconds ---" % (time.time() - start_time))
+# into hours, minutes and seconds 
+import datetime 
+
+def convert(n): 
+	return str(datetime.timedelta(seconds = n)) 
+	
+n =  time.time() - start_time
+
+def convert_sec(n): 
+    return str(datetime.timedelta(seconds = n))
+
+print("---Execution Time ---",convert_sec(n))
