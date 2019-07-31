@@ -192,7 +192,7 @@ print('Train Score: %.2f RMSE' % (rms))
 
 print("Len of price",len(price))
 
-for i in range(3):
+for i in range(2):
     price_value = np.round(price[i],2)
     Future_date = Current_date + datetime.timedelta(i+1)
     print("price = ",price_value," Future Date of ", Future_date)
@@ -202,7 +202,7 @@ for i in range(3):
 c = CurrencyRates()
 usd_rate = c.get_rate('USD', 'INR')    # same as get_rate('USD', 'INR')
 print(usd_rate)
-str_msg2 = "USD to INR Rate for today as per forex python is " + str(round(usd_rate),2)
+str_msg2 = "USD to INR Rate for today as per forex python is " + str(round(usd_rate,2))
 
 def  display_predicted_value_on_msgbox(price):
     i = 0 # for next day, incremeting the value of i till len(price) to get prediction for those many days
