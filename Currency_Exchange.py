@@ -39,7 +39,7 @@ np.random.seed(7)
 
 #Start_date = datetime.datetime.now() + datetime.timedelta(-120)
 Start_date = datetime.datetime.now() + datetime.timedelta(-122)
-Current_date = datetime.datetime.now() + datetime.timedelta(-2)
+Current_date = datetime.datetime.now() + datetime.timedelta(-1)
 #Current_date = datetime.datetime.now()
 print("Start_date = ",Start_date,"\n Current_date = ",Current_date)
 
@@ -198,16 +198,22 @@ for i in range(3):
     print("price = ",price_value," Future Date of ", Future_date)
 
 
+#from forex_python.converter import CurrencyRates
+c = CurrencyRates()
+usd_rate = c.get_rate('USD', 'INR')    # same as get_rate('USD', 'INR')
+print(usd_rate)
+str_msg2 = "USD to INR Rate for today as per forex python is " + str(round(usd_rate),2)
+
 def  display_predicted_value_on_msgbox(price):
     i = 0 # for next day, incremeting the value of i till len(price) to get prediction for those many days
     price_value = np.round(price[i],2)
     Future_date = Current_date + datetime.timedelta(i+1)
     str_msg0 = "For " + str(Future_date.strftime("%d %b %Y ")) + ",Predicted USD-INR value is "+ str(price_value)
-    i = 2 # for next day, incremeting the value of i till len(price) to get prediction for those many days
+    i = 1 # for next day, incremeting the value of i till len(price) to get prediction for those many days
     price_value = np.round(price[i],2)
     Future_date = Current_date + datetime.timedelta(i+1)
     str_msg1 = "For " + str(Future_date.strftime("%d %b %Y ")) + ",Predicted USD-INR value is "+ str(price_value)
-    str_msg = str_msg0 + "\n"+ str_msg1
+    str_msg = str_msg2 + "\n" + str_msg0 + "\n"+ str_msg1
     Mbox('Predicted USD-INR value ', str_msg , 1)    
 # Generate Graphical trend chart for analysis using Historical Currency data
 #generate_trend_analysis_on_historical_data(currency_df)  
